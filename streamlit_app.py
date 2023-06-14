@@ -1,12 +1,10 @@
 import streamlit as st
 import pandas as pd
 import zipfile
-from sklearn.linear_model import LogisticRegression
+from sklearn.externals import joblib
 
 # Load the logistic regression model
-model = LogisticRegression()
-model.load_model('logistic_regression_model.pkl')  # Assuming you have saved the trained model
-
+model = joblib.load('logistic_regression_model.pkl')
 def main():
     st.title('Anomaly Detection')
     
