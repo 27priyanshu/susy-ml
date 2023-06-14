@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import zipfile
-from sklearn.externals import joblib
+import joblib
 
 # Load the logistic regression model
 model = joblib.load('logistic_regression_model.pkl')
