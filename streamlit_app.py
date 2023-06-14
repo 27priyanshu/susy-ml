@@ -5,7 +5,7 @@ import joblib
 import os
 
 # Define the path to the model file
-model_file_path = os.path.join(os.getcwd(), "logistic_regression_model.pkl")
+model_file_path = os.path.join(os.getcwd(), "model.pkl")
 
 # Load the logistic regression model
 try:
