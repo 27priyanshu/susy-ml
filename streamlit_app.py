@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import zipfile
 import joblib
 import os
 
@@ -22,29 +21,15 @@ def main():
     st.title("Susy ML App")
     st.write("Welcome to the Susy ML App!")
 
-    uploaded_file = st.file_uploader("Upload a CSV file", type=["csv", "zip"])
+    uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
     if uploaded_file is not None:
-        # Check if the file is a zip file
-        if uploaded_file.name.endswith('.zip'):
-            try:
-                with zipfile.ZipFile(uploaded_file, 'r') as zip_ref:
-                    # Extract the CSV file from the zip
-                    csv_filename = zip_ref.namelist()[0]
-                    zip_ref.extract(csv_filename)
-                    # Read the CSV file using pandas
-                    df = pd.read_csv(csv_filename)
-            except Exception as e:
-                st.error(f"Error processing the zip file: {str(e)}")
-                st.stop()
-
-        else:
-            # Read the CSV file directly using pandas
-            try:
-                df = pd.read_csv(uploaded_file)
-            except Exception as e:
-                st.error(f"Error reading the CSV file: {str(e)}")
-                st.stop()
+        try:
+            # Read the CSV file using pandas
+            df = pd.read_csv(uploaded_file)
+        except Exception as e:
+            st.error(f"Error reading the CSV file: {str(e)}")
+            st.stop()
 
         # Perform prediction using the loaded model
         prediction = model.predict(df)
